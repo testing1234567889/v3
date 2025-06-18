@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktivasi VIP AnimeKita</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB5qZ9-sGdXM-BgmTm_yh9ofFpVNu82k5I",
+      authDomain: "animekitavip.firebaseapp.com",
+      projectId: "animekitavip"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+</head>
+<body onload="aturTampilanAwal()">
+  <div class="vip-box">
+    <div class="tab-buttons">
+      <button onclick="bukaTab('loginToken')" id="btnLoginToken" class="active">🔑 Login Token</button>
+      <button onclick="bukaTab('aktivasi')" id="btnAktivasi">🚀 Aktivasi VIP</button>
+      <button onclick="bukaTab('status')" id="btnStatus">🔍 Cek Status</button>
+    </div>
+
+    <div id="loginToken" class="tab-content active">
+      <input type="text" id="tokenInput" placeholder="Masukkan token VIP kamu" />
+      <button onclick="cekTokenFirebase()">Login Token</button>
+      <div id="hasilLogin"></div>
+    </div>
+
+    <div id="aktivasi" class="tab-content">
+      <input type="email" id="emailAktivasi" placeholder="Masukkan email kamu" />
+      <select id="durasi">
+        <option value="Mzk3MjA4NDM3NjFfM18x">1 Bulan VIP</option>
+        <option value="Mzk3MjA4NDM3NjFfM18z">3 Bulan VIP</option>
+        <option value="Mzk3MjA4NDM3NjFfM18xMg%3D%3D">1 Tahun VIP</option>
+      </select>
+      <button onclick="prosesVip()">Aktifkan VIP</button>
+      <button onclick="logoutVIP()">🔓 Keluar Token</button>
+      <div id="hasilAktivasi"></div>
+    </div>
+
+    <div id="status" class="tab-content">
+      <input type="email" id="emailStatus" placeholder="Masukkan email kamu" />
+      <button onclick="cekStatus()">Cek Status</button>
+      <button onclick="salinStatus()">Salin Status</button>
+      <div id="hasilStatus"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
