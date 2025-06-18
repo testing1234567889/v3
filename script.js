@@ -128,6 +128,10 @@ async function cekTokenFirebase() {
   result.innerHTML = '🔄 Memvalidasi token...';
 
   try {
+    if (typeof db === "undefined") {
+      throw new Error("Firebase belum siap. Coba reload halaman.");
+    }
+
     const doc = await db.collection("tokens").doc(token).get();
     if (!doc.exists) throw new Error("Token tidak ditemukan");
 
@@ -142,11 +146,12 @@ async function cekTokenFirebase() {
     localStorage.setItem("vipLevel", data.vipLevel);
 
     result.innerHTML = `<span style="color:green">✅ Selamat datang VIP Level ${data.vipLevel}</span>`;
-    bukaTab('aktivasi');
+    selesaiLoginToken?.();
   } catch (err) {
     result.innerHTML = '<span style="color:red">❌ ' + err.message + '</span>';
   }
 }
+
 
 function logoutVIP() {
   localStorage.removeItem("vipToken");
